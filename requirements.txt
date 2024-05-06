@@ -1,0 +1,8 @@
+pip==23.2.1
+setuptools==68.2.0
+wheel==0.41.2
+PyQt6==6.6.1
+numpy==1.26.3
+scipy==1.11.4
+pyqtgraph==0.13.3
+statsmodels==0.14.1

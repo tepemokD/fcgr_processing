@@ -1,0 +1,12 @@
+Unit: SI
+Name: #1
+Specimen: C(T)
+
+Geometry
+W = 40 mm
+B = 10 mm
+a0 = 12 mm
+
+Load
+P = 9,81 kN
+R = 0.1

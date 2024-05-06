@@ -1,0 +1,5 @@
+Length, mm	Forse range, kgs
+1	900
+2	900
+3	900
+40	900

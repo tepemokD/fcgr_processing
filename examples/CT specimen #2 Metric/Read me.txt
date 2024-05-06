@@ -1,0 +1,12 @@
+Unit: Metric
+Name: #2 - 510
+Specimen: C(T)
+
+Geometry
+W = 40,37 mm
+B = 10,06 mm
+a0 = 12 mm
+
+Load
+P = 650 kgs
+R = 0.1

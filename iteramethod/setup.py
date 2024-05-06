@@ -1,0 +1,23 @@
+COEF_CONV_METHOD = 0.9995
+FORMAL_V23 = 0.001
+MIN_POINT = 20
+COEF_CONV_INCREMENT = 0.0001
+COEF_CONV_LENGTH = 0.00001
+
+START_EXPONENT_N = 1
+END_EXPONENT_N = 10
+
+MAX_SIF_RANGE_CALCULATED = 0.9995
+
+FORMAL_SPECIMEN = {'W': 40,
+                   'a0': 0,
+                   'B': 10,
+                   'P_MAX': 800,
+                   'P_MAX_SI': 7.85,
+                   'R': 0.1,
+                   'NUM_POINT': 40}
+
+MIN_SPECIMEN_MEAN_ONE_TEMPERATURE = 4
+
+COEF_CONV_METHOD_FP = 0.95
+COEF_HOMOSCEDASTICITY_FP = 0.05

@@ -1,0 +1,12 @@
+Unit: Metric
+Name: #1
+Specimen: C(T)
+
+Geometry
+W = 40 mm
+B = 10 mm
+a0 = 12 mm
+
+Load
+P = 1000 kgs
+R = 0.1

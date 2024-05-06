@@ -1,0 +1,12 @@
+Unit: Metric
+Name: #3
+Specimen: C(T)
+
+Geometry
+W = 40,015 mm
+B = 3,99 mm
+a0 = 8,985 mm
+
+Load
+P = 279,91 kgs
+R = 0.1
