@@ -42,16 +42,16 @@ class Specimen(RangeSIF, FCGR):
         if self.type_load == 'cyclic_const_load_max':
             amplitude = self.load_max * (1 - self.asymmetry) / 2
             mean = self.load_max * (1 - self.asymmetry) / 2
-            text += f"Cycling testing: amplitude = {amplitude:.2f}, mean = {mean:.2f}\n"
+            text += f"Cycling testing: force amplitude = {amplitude:.2f}, force mean = {mean:.2f}\n"
 
         text += f"\n"
         if any(self.cycle_crack):
             text += f"Experimental data:\n"
-            text += f"Point\tCycle\tLength\tSIF range\tFCGR\n"
+            text += f"Point\tLength\tCycle\tRange SIF\tFCGR\n"
             for index in range(self.num_point):
                 text += (f"{index + 1}\t"
                          f"{self.length_crack[index]:.4f}\t"
-                         f"{self.cycle_crack[index]}\t"
+                         f"{self.cycle_crack[index]:.0f}\t"
                          f"{self.value(self.length_crack[index]):.2f}\t")
                 if self.fcgr_sample[index] > 0:
                     text += f"{self.fcgr_sample[index]:.4e}\n"

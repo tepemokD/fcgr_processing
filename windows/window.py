@@ -49,6 +49,8 @@ class WindowFcgr(QMainWindow,
         self.Button_create_specimen.clicked.connect(self.create_specimen)
         self.Button_calculate.clicked.connect(self.calculate_specimen)
 
+        self.num_point.valueChanged.connect(self._info_num_point)
+
         self.about.triggered.connect(self._window_about)
         self.manual.triggered.connect(self._open_manual)
         self.theory.triggered.connect(self._open_theory)
@@ -222,6 +224,9 @@ class WindowFcgr(QMainWindow,
         self.unit_w.setText(f"{self.units_name.length}")
         self.unit_b.setText(f"{self.units_name.length}")
         self.unit_a0.setText(f"{self.units_name.length}")
+        self.length_np_unit.setText(f"{self.units_name.length}")
+        self.sif_np_unit.setText(f"{self.units_name.sif}")
+
         if self.specimen:
             self.label_length_specimen.setText(f"от {min(self.specimen.length_crack):.4f} {self.units_name.length} "
                                                f"до {max(self.specimen.length_crack):.4f} {self.units_name.length}")
@@ -426,6 +431,9 @@ class WindowFcgr(QMainWindow,
             self.label_cgr_specimen.setText(
                 f"от {self.specimen.fcgr_sample[0]:.4e} {self.units_name.cgr} "
                 f"до {self.specimen.fcgr_sample[-1]:.4e} {self.units_name.cgr}")
+            self.num_point.setEnabled(True)
+            # Обновление границ номеров точек
+            self.num_point.setMaximum(self.specimen.num_point)
 
             self.plot_fcgr()
             self.plot_length_specimen()
@@ -434,6 +442,16 @@ class WindowFcgr(QMainWindow,
             if self.checking_pre_calculate():
                 self.Button_auto_type.setEnabled(False)
                 self.Button_manual_type.setChecked(True)
+            else:
+                # Информаци о формальной верхней границе
+                self.label_f23_info.setText(f"номер точки: {self.specimen.formal_23_specimen['numeric_point']:.0f},<br>"
+                                            f"длина трещины: {self.specimen.formal_23_specimen['length']:.4f} "
+                                            f"{self.units_name.length},<br>"
+                                            f"количество циклов: {self.specimen.formal_23_specimen['cycle']:.0f},<br>"
+                                            f"размах КИН: {self.specimen.formal_23_specimen['range_SIF']:.2f} "
+                                            f"{self.units_name.sif},<br>"
+                                            f"СРТУ: {self.specimen.formal_23_specimen['gr']:.4e} "
+                                            f"{self.units_name.cgr}")
 
     def calculate_specimen(self) -> None:
         """
@@ -838,10 +856,16 @@ class WindowFcgr(QMainWindow,
                                         f"до - {self.units_name.sif}")
         self.label_cgr_specimen.setText(f"от - {self.units_name.cgr} "
                                         f"до - {self.units_name.cgr}")
+        self.length_np.setText(f"-")
+        self.cycle_np.setText(f"-")
+        self.sif_np.setText(f"-")
+        self.fcgr_np.setText(f"-")
+        self.label_f23_info.setText(f"-")
 
         self.len_cycle.clear()
         self.sif_specimen.clear()
         self.fcgr_specimen.clear()
+        self.num_point.clear()
 
         self._clear_calculate()
 
@@ -896,6 +920,17 @@ class WindowFcgr(QMainWindow,
         self.label_grc_calculate.setText(f"от - {self.units_name.cgr} "
                                          f"до - {self.units_name.cgr}")
 
+    def _info_num_point(self) -> None:
+        """
+        Information about the point by number.
+        :return: None
+        """
+        num_point = self.num_point.value() - 1
+        self.length_np.setText(f"{self.specimen.length_crack[num_point]:.4f}")
+        self.cycle_np.setText(f"{self.specimen.cycle_crack[num_point]:.0f}")
+        self.sif_np.setText(f"{self.specimen.value(self.specimen.length_crack[num_point]):.2f}")
+        self.fcgr_np.setText(f"{self.specimen.fcgr_sample[num_point]:.4e}")
+
     def save_result_to_file(self) -> None:
         """
         Saving the results to a file
@@ -907,7 +942,8 @@ class WindowFcgr(QMainWindow,
                                                        filter="Text (*.txt)",
                                                        )
             with open(file_name, 'w') as file:
-                result = ""
+                result = f"{self.units_name}\n"
+                result += "\n" + "-" * 70 + "\n"
                 if self.calculate:
                     result += f"{self.calculate}"
                 if self.calculate_12:

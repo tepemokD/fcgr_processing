@@ -1129,18 +1129,18 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="label_32">
+        <widget class="QLabel" name="label_f23_info">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>50</y>
+           <y>40</y>
            <width>411</width>
-           <height>31</height>
+           <height>91</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1171,7 +1171,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>401</width>
+           <width>441</width>
            <height>31</height>
           </rect>
          </property>
@@ -1251,10 +1251,13 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
-        <widget class="QSpinBox" name="spinBox">
+        <widget class="QSpinBox" name="num_point">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
-           <x>420</x>
+           <x>470</x>
            <y>10</y>
            <width>101</width>
            <height>31</height>
@@ -1278,7 +1281,7 @@ p, li { white-space: pre-wrap; }
           <number>1</number>
          </property>
         </widget>
-        <widget class="QLabel" name="label_49">
+        <widget class="QLabel" name="length_np">
          <property name="geometry">
           <rect>
            <x>190</x>
@@ -1297,7 +1300,7 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="label_50">
+        <widget class="QLabel" name="cycle_np">
          <property name="geometry">
           <rect>
            <x>190</x>
@@ -1316,7 +1319,7 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="label_51">
+        <widget class="QLabel" name="length_np_unit">
          <property name="geometry">
           <rect>
            <x>300</x>
@@ -1335,7 +1338,7 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="label_52">
+        <widget class="QLabel" name="sif_np_unit">
          <property name="geometry">
           <rect>
            <x>560</x>
@@ -1367,7 +1370,7 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="label_54">
+        <widget class="QLabel" name="sif_np">
          <property name="geometry">
           <rect>
            <x>460</x>
@@ -1386,7 +1389,7 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="label_55">
+        <widget class="QLabel" name="fcgr_np">
          <property name="geometry">
           <rect>
            <x>420</x>
@@ -1698,7 +1701,7 @@ p, li { white-space: pre-wrap; }
                 <x>0</x>
                 <y>0</y>
                 <width>366</width>
-                <height>400</height>
+                <height>345</height>
                </rect>
               </property>
               <layout class="QFormLayout" name="formLayout_2">
@@ -2083,7 +2086,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1220</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="file">

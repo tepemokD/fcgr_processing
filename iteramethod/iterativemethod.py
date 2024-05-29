@@ -47,7 +47,7 @@ class IterativeMethod(Criteria):
             text += f"{self.coefficient_c:.4e}\t{self.exponent_n}\n"
             text += f"\n"
 
-            text += f"length_min\tcycle_min\tdelta SIF_min\tV_min\tstart point\n"
+            text += f"length_min\tcycle_min\trange SIF_min\tV_min\tstart point\n"
             text += (f"{self.cgua.specimen.length_crack[self.fn12]:.4f}\t"
                      f"{self.cgua.specimen.cycle_crack[self.fn12]:.0f}\t"
                      f"{self.cgua.specimen.value(self.cgua.specimen.length_crack[self.fn12]):.2f}\t"
@@ -55,7 +55,7 @@ class IterativeMethod(Criteria):
                      f"{self.fn12 + 1}\n")
             text += f"\n"
 
-            text += f"length_max\tcycle_min\tdelta SIF_max\tV_max\tend point\n"
+            text += f"length_max\tcycle_min\trange SIF_max\tV_max\tend point\n"
             text += (f"{self.cgua.specimen.length_crack[self.fn23]:.4f}\t"
                      f"{self.cgua.specimen.cycle_crack[self.fn23]:.0f}\t"
                      f"{self.cgua.specimen.value(self.cgua.specimen.length_crack[self.fn23]):.2f}\t"
@@ -95,7 +95,7 @@ class IterativeMethod(Criteria):
                          f"{self.parameters23[index]['criteria']['cycle_all']:.6f}\t"
                          f"{self.parameters23[index]['criteria']['comparison']:.6f}\n")
 
-        text += "\n" + "-" * 20 + "\n"
+        text += "\n" + "-" * 70 + "\n"
         text += f"{self.cgua.specimen}\n"
 
         return text

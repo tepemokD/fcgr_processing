@@ -23,9 +23,20 @@ class UnitsChange:
         self.force: str = None
         self.length: str = None
         self.cgr: str = None
+        self.coefficient_c: str = None
         self.coef_sif: int = None
 
         self.set_units(self.unit)
+
+    def __repr__(self):
+        text = (f"The measurement system: {self.unit}\n"
+                f"[length] - [{self.length}]\n"
+                f"[force] - [{self.force}]\n"
+                f"[range SIF] - [{self.sif}]\n"
+                f"[FCGR] - [{self.cgr}]\n"
+                f"[coefficient C] - [{self.coefficient_c}]")
+
+        return text
 
     def set_units(self,
                   unit: str) -> None:
@@ -34,6 +45,7 @@ class UnitsChange:
         self.force = self.units[self.unit]["force"]
         self.length = self.units[self.unit]["length"]
         self.cgr = self.units[self.unit]["cgr"]
+        self.coefficient_c = self.units[self.unit]["coef_c"]
 
 
 if __name__ == "__main__":
