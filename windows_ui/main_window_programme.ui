@@ -99,9 +99,9 @@
        <widget class="QWidget" name="horizontalLayoutWidget_3">
         <property name="geometry">
          <rect>
-          <x>50</x>
+          <x>40</x>
           <y>10</y>
-          <width>1101</width>
+          <width>1111</width>
           <height>35</height>
          </rect>
         </property>
@@ -147,9 +147,9 @@
        <widget class="QWidget" name="horizontalLayoutWidget_4">
         <property name="geometry">
          <rect>
-          <x>50</x>
+          <x>10</x>
           <y>50</y>
-          <width>1101</width>
+          <width>1171</width>
           <height>470</height>
          </rect>
         </property>
@@ -160,13 +160,13 @@
             <widget class="QFrame" name="frame">
              <property name="minimumSize">
               <size>
-               <width>350</width>
+               <width>400</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>350</width>
+               <width>400</width>
                <height>16777215</height>
               </size>
              </property>
@@ -199,7 +199,7 @@
                <rect>
                 <x>10</x>
                 <y>50</y>
-                <width>331</width>
+                <width>181</width>
                 <height>31</height>
                </rect>
               </property>
@@ -215,7 +215,7 @@
                <rect>
                 <x>14</x>
                 <y>100</y>
-                <width>51</width>
+                <width>41</width>
                 <height>31</height>
                </rect>
               </property>
@@ -231,7 +231,7 @@
                <rect>
                 <x>14</x>
                 <y>140</y>
-                <width>51</width>
+                <width>41</width>
                 <height>31</height>
                </rect>
               </property>
@@ -247,7 +247,7 @@
                <rect>
                 <x>14</x>
                 <y>180</y>
-                <width>51</width>
+                <width>41</width>
                 <height>31</height>
                </rect>
               </property>
@@ -262,7 +262,7 @@ p, li { white-space: pre-wrap; }
              <widget class="QLabel" name="unit_w">
               <property name="geometry">
                <rect>
-                <x>190</x>
+                <x>160</x>
                 <y>100</y>
                 <width>31</width>
                 <height>31</height>
@@ -275,7 +275,7 @@ p, li { white-space: pre-wrap; }
              <widget class="QLabel" name="unit_b">
               <property name="geometry">
                <rect>
-                <x>190</x>
+                <x>160</x>
                 <y>140</y>
                 <width>31</width>
                 <height>31</height>
@@ -288,7 +288,7 @@ p, li { white-space: pre-wrap; }
              <widget class="QLabel" name="unit_a0">
               <property name="geometry">
                <rect>
-                <x>210</x>
+                <x>160</x>
                 <y>180</y>
                 <width>31</width>
                 <height>31</height>
@@ -331,9 +331,9 @@ p, li { white-space: pre-wrap; }
              <widget class="QDoubleSpinBox" name="Edit_w_specimen">
               <property name="geometry">
                <rect>
-                <x>70</x>
+                <x>60</x>
                 <y>100</y>
-                <width>101</width>
+                <width>81</width>
                 <height>31</height>
                </rect>
               </property>
@@ -364,9 +364,9 @@ p, li { white-space: pre-wrap; }
              <widget class="QDoubleSpinBox" name="Edit_B_specimen">
               <property name="geometry">
                <rect>
-                <x>70</x>
+                <x>60</x>
                 <y>140</y>
-                <width>101</width>
+                <width>81</width>
                 <height>31</height>
                </rect>
               </property>
@@ -394,9 +394,9 @@ p, li { white-space: pre-wrap; }
              <widget class="QDoubleSpinBox" name="Edit_a0_specimen">
               <property name="geometry">
                <rect>
-                <x>70</x>
+                <x>60</x>
                 <y>180</y>
-                <width>131</width>
+                <width>81</width>
                 <height>31</height>
                </rect>
               </property>
@@ -421,19 +421,83 @@ p, li { white-space: pre-wrap; }
                <double>12.000000000000000</double>
               </property>
              </widget>
+             <widget class="QLabel" name="label_7">
+              <property name="geometry">
+               <rect>
+                <x>200</x>
+                <y>50</y>
+                <width>191</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Информация</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_material">
+              <property name="geometry">
+               <rect>
+                <x>200</x>
+                <y>100</y>
+                <width>191</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Материал</string>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_temperature">
+              <property name="geometry">
+               <rect>
+                <x>200</x>
+                <y>140</y>
+                <width>191</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Температура</string>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_number_sp">
+              <property name="geometry">
+               <rect>
+                <x>200</x>
+                <y>180</y>
+                <width>191</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Номер образца</string>
+              </property>
+             </widget>
             </widget>
            </item>
            <item>
             <widget class="QFrame" name="frame_2">
              <property name="minimumSize">
               <size>
-               <width>350</width>
+               <width>400</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>350</width>
+               <width>400</width>
                <height>16777215</height>
               </size>
              </property>
@@ -1096,9 +1160,9 @@ p, li { white-space: pre-wrap; }
        <widget class="QFrame" name="frame_6">
         <property name="geometry">
          <rect>
-          <x>720</x>
+          <x>820</x>
           <y>530</y>
-          <width>431</width>
+          <width>361</width>
           <height>141</height>
          </rect>
         </property>
@@ -1113,7 +1177,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>411</width>
+           <width>341</width>
            <height>31</height>
           </rect>
          </property>
@@ -1134,7 +1198,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>10</x>
            <y>40</y>
-           <width>411</width>
+           <width>341</width>
            <height>91</height>
           </rect>
          </property>
@@ -1154,9 +1218,9 @@ p, li { white-space: pre-wrap; }
        <widget class="QFrame" name="frame_7">
         <property name="geometry">
          <rect>
-          <x>50</x>
+          <x>240</x>
           <y>530</y>
-          <width>651</width>
+          <width>571</width>
           <height>141</height>
          </rect>
         </property>
@@ -1171,7 +1235,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>441</width>
+           <width>301</width>
            <height>31</height>
           </rect>
          </property>
@@ -1181,7 +1245,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="text">
-          <string>Данные об экспериментальной точке с номером</string>
+          <string>Номер экспериментальной точки</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1192,7 +1256,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>10</x>
            <y>50</y>
-           <width>171</width>
+           <width>121</width>
            <height>31</height>
           </rect>
          </property>
@@ -1208,7 +1272,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>10</x>
            <y>90</y>
-           <width>161</width>
+           <width>121</width>
            <height>31</height>
           </rect>
          </property>
@@ -1222,9 +1286,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_47">
          <property name="geometry">
           <rect>
-           <x>360</x>
+           <x>310</x>
            <y>50</y>
-           <width>101</width>
+           <width>71</width>
            <height>31</height>
           </rect>
          </property>
@@ -1238,9 +1302,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_48">
          <property name="geometry">
           <rect>
-           <x>360</x>
+           <x>310</x>
            <y>90</y>
-           <width>51</width>
+           <width>71</width>
            <height>31</height>
           </rect>
          </property>
@@ -1257,7 +1321,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="geometry">
           <rect>
-           <x>470</x>
+           <x>320</x>
            <y>10</y>
            <width>101</width>
            <height>31</height>
@@ -1284,7 +1348,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="length_np">
          <property name="geometry">
           <rect>
-           <x>190</x>
+           <x>150</x>
            <y>50</y>
            <width>101</width>
            <height>31</height>
@@ -1303,7 +1367,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="cycle_np">
          <property name="geometry">
           <rect>
-           <x>190</x>
+           <x>150</x>
            <y>90</y>
            <width>101</width>
            <height>31</height>
@@ -1322,7 +1386,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="length_np_unit">
          <property name="geometry">
           <rect>
-           <x>300</x>
+           <x>260</x>
            <y>50</y>
            <width>41</width>
            <height>31</height>
@@ -1341,9 +1405,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="sif_np_unit">
          <property name="geometry">
           <rect>
-           <x>560</x>
+           <x>490</x>
            <y>50</y>
-           <width>81</width>
+           <width>71</width>
            <height>31</height>
           </rect>
          </property>
@@ -1357,9 +1421,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_53">
          <property name="geometry">
           <rect>
-           <x>560</x>
+           <x>490</x>
            <y>90</y>
-           <width>81</width>
+           <width>71</width>
            <height>31</height>
           </rect>
          </property>
@@ -1373,9 +1437,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="sif_np">
          <property name="geometry">
           <rect>
-           <x>460</x>
+           <x>400</x>
            <y>50</y>
-           <width>71</width>
+           <width>81</width>
            <height>31</height>
           </rect>
          </property>
@@ -1392,9 +1456,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="fcgr_np">
          <property name="geometry">
           <rect>
-           <x>420</x>
+           <x>400</x>
            <y>90</y>
-           <width>131</width>
+           <width>81</width>
            <height>31</height>
           </rect>
          </property>
@@ -1408,6 +1472,19 @@ p, li { white-space: pre-wrap; }
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
+       </widget>
+       <widget class="QTextEdit" name="textEdit_total_sp">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>530</y>
+          <width>221</width>
+          <height>141</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Информация об образце</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_2">

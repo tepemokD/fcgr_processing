@@ -271,7 +271,7 @@ class WindowFcgr(QMainWindow,
                                 text='длина трещины',
                                 units=self.units_name.length)
         self.len_cycle.setLabel('bottom',
-                                text=f"{self.units_name.cgr}<br>")
+                                text=f"{self.units_name.cycle}<br>")
         self.len_cycle.showGrid(x=True,
                                 y=True)
         self.len_cycle.addItem(scatter)
@@ -291,7 +291,7 @@ class WindowFcgr(QMainWindow,
         self.sif_specimen.setTitle('Размах КИН от длины трещины')
         self.sif_specimen.setLabel('left',
                                    text='размах КИН',
-                                   units=self.units_name.cgr)
+                                   units=self.units_name.sif)
         self.sif_specimen.setLabel('bottom',
                                    text=f"длина трещины ({self.units_name.length})<br>")
         self.sif_specimen.showGrid(x=True,
@@ -358,7 +358,7 @@ class WindowFcgr(QMainWindow,
         """
         self._clear_specimen()
 
-        if self.Box_specimen_type.currentIndex() == 2:
+        if self.Box_specimen_type.currentIndex() == 2:  # Load file SIF range
             if (self.checking_file(self.Edit_file_experiment.text(),
                                    title="Ошибка в файле с экспериментальными данными",
                                    column1_check=('increasing',),
@@ -371,9 +371,13 @@ class WindowFcgr(QMainWindow,
                                       self.Edit_file_load.text(),
                                       "Ошибка в файле с зависимостью размаха КИН от длины трещины")):
                 self.specimen = Specimen.create_specimen_set_sif(self.Edit_file_experiment.text(),
-                                                                 self.Edit_file_load.text())
+                                                                 self.Edit_file_load.text(),
+                                                                 self.lineEdit_temperature.text(),
+                                                                 self.lineEdit_material.text(),
+                                                                 self.lineEdit_number_sp.text(),
+                                                                 self.textEdit_total_sp.toPlainText())
 
-        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 1:
+        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 1:  # Load file
             if (self.checking_file(self.Edit_file_experiment.text(),
                                    title="Ошибка в файле с экспериментальными данными",
                                    column1_check=('increasing',),
@@ -394,9 +398,13 @@ class WindowFcgr(QMainWindow,
                                                                   self.Edit_w_specimen.value(),
                                                                   self.Edit_B_specimen.value(),
                                                                   self.Edit_a0_specimen.value(),
+                                                                  self.lineEdit_temperature.text(),
+                                                                  self.lineEdit_material.text(),
+                                                                  self.lineEdit_number_sp.text(),
+                                                                  self.textEdit_total_sp.toPlainText(),
                                                                   si=True if self.units_name.unit == "SI" else False)
 
-        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() != 1:
+        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 0:  # Циклическое
             if (self.checking_file(self.Edit_file_experiment.text(),
                                    title="Ошибка в файле с экспериментальными данными",
                                    column1_check=('increasing',),
@@ -412,6 +420,10 @@ class WindowFcgr(QMainWindow,
                                                          self.Edit_a0_specimen.value(),
                                                          self.Edit_Pmax_load.value(),
                                                          self.Edit_R_load.value(),
+                                                         self.lineEdit_temperature.text(),
+                                                         self.lineEdit_material.text(),
+                                                         self.lineEdit_number_sp.text(),
+                                                         self.textEdit_total_sp.toPlainText(),
                                                          si=True if self.units_name.unit == "SI" else False)
 
         self.Button_auto_type.setEnabled(True)
@@ -520,6 +532,8 @@ class WindowFcgr(QMainWindow,
 
                     self._plot_result_12(result=self.calculate_12)
 
+                    self.check_result_done(True)
+
             elif self.Button_search_n23.isChecked():
                 self._clear_calculate_23()
 
@@ -535,6 +549,8 @@ class WindowFcgr(QMainWindow,
 
                     self._plot_result_23(result=self.calculate_23)
 
+                    self.check_result_done(True)
+
             elif self.Button_plot.isChecked():
                 self._clear_calculate_result()
 
@@ -543,7 +559,6 @@ class WindowFcgr(QMainWindow,
                     if self.calculate_12 and self.Edit_num_point_end.value() - 1 == \
                             self.calculate_12.parameters12[0]['point_numbers'][1]:
 
-                        index = 0
                         for index in range(len(self.calculate_12.parameters12)):
                             if self.Edit_num_point_start.value() - 1 == \
                                     self.calculate_12.parameters12[index]['point_numbers'][0]:
@@ -554,7 +569,6 @@ class WindowFcgr(QMainWindow,
                                        'exponent_n': self.calculate_12.parameters12[index]['exponent_n']}
                     else:
 
-                        index = 0
                         for index in range(len(self.calculate_23.parameters23)):
                             if self.Edit_num_point_end.value() - 1 == \
                                     self.calculate_23.parameters23[index]['point_numbers'][1]:
@@ -577,6 +591,8 @@ class WindowFcgr(QMainWindow,
                                       grc_start=self.specimen.fcgr_sample[dict_result['point_numbers'][0]],
                                       grc_end=self.specimen.fcgr_sample[dict_result['point_numbers'][1]])
                     self._plot_graph_result(dict_result)
+
+                    self.check_result_done(True)
 
         elif self.Button_borders_type.isChecked():
             self._clear_calculate()
@@ -602,6 +618,8 @@ class WindowFcgr(QMainWindow,
                                   grc_start=self.specimen.fcgr_sample[dict_result['point_numbers'][0]],
                                   grc_end=self.specimen.fcgr_sample[dict_result['point_numbers'][1]])
                 self._plot_graph_result(dict_result)
+
+                self.check_result_done(True)
 
     def _plot_result_12(self,
                         result: IterativeMethod) -> None:
@@ -727,7 +745,7 @@ class WindowFcgr(QMainWindow,
                                              name=LEGEND_CRITERIA[key][0],
                                              pen=LEGEND_CRITERIA[key][1])
 
-        self.plot_coef_c_23.setTitle(f'Коэффициент C от<br>количества отброшенных точек')
+        self.plot_coef_c_23.setTitle(f'Коэффициент C от<br>количества добавленных точек')
         self.plot_coef_c_23.setLabel('left',
                                      text='коэффициент С')
         self.plot_coef_c_23.setLabel('bottom',
@@ -736,7 +754,7 @@ class WindowFcgr(QMainWindow,
                                      y=True)
         self.plot_coef_c_23.addItem(scatter_coef_23)
 
-        self.plot_exp_n_23.setTitle(f'Показатель степени n от<br>количества отброшенных точек')
+        self.plot_exp_n_23.setTitle(f'Показатель степени n от<br>количества добавленных точек')
         self.plot_exp_n_23.setLabel('left',
                                     text='показатель степени n')
         self.plot_exp_n_23.setLabel('bottom',

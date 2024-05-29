@@ -9,6 +9,10 @@ class Specimen(RangeSIF, FCGR):
     def __init__(self,
                  type_sp: str = 'compact_tension',
                  type_load: str = 'cyclic_const_load_max',
+                 temperature: str = '',
+                 material: str = '',
+                 number: str = '',
+                 total: str = '',
                  **kwargs):
 
         assert type_sp in ('compact_tension',
@@ -30,6 +34,10 @@ class Specimen(RangeSIF, FCGR):
         self.w: float = None
         self.b: float = None
         self.a0: float = None
+        self.temperature: str = temperature
+        self.material: str = material
+        self.number: str = number
+        self.total: str = total
 
         super().__init__(**kwargs)
 
@@ -37,6 +45,11 @@ class Specimen(RangeSIF, FCGR):
         text = f"The type of specimen: {self.type_sp}\n"
         if self.w:
             text += f"The dimensions of the specimen: W = {self.w}, B = {self.b}, a0 = {self.a0}\n"
+
+        text += (f"Material: {self.material}\n"
+                 f"Temperature: {self.temperature}\n"
+                 f"Number specimen: {self.number}\n"
+                 f"Total: {self.total}\n")
 
         text += f"\n"
         if self.type_load == 'cyclic_const_load_max':
@@ -63,9 +76,17 @@ class Specimen(RangeSIF, FCGR):
     @classmethod
     def create_specimen_set_sif(cls,
                                 file_experiment: str,
-                                file_sif: str) -> Specimen:
+                                file_sif: str,
+                                temperature_specimen: str,
+                                material_specimen: str,
+                                number_specimen: str,
+                                total_specimen: str) -> Specimen:
         specimen = cls(type_load='user_SIF',
-                       type_sp='other')
+                       type_sp='other',
+                       temperature=temperature_specimen,
+                       material=material_specimen,
+                       number=number_specimen,
+                       total=total_specimen)
         specimen.setcrackgrowth(file_experiment)
         specimen.setsif(file_sif)
         specimen.createfcg()
@@ -79,9 +100,17 @@ class Specimen(RangeSIF, FCGR):
                                  w: float,
                                  b: float,
                                  a0: float,
+                                 temperature_specimen: str,
+                                 material_specimen: str,
+                                 number_specimen: str,
+                                 total_specimen: str,
                                  si: bool = False) -> Specimen:
         specimen = cls(type_sp=type_specimen,
-                       type_load='user_load')
+                       type_load='user_load',
+                       temperature=temperature_specimen,
+                       material=material_specimen,
+                       number=number_specimen,
+                       total=total_specimen)
         specimen.setgeometry({'W': w,
                               'B': b,
                               'a0': a0})
@@ -103,8 +132,16 @@ class Specimen(RangeSIF, FCGR):
                         a0: float,
                         p_max: float,
                         r: float,
+                        temperature_specimen: str,
+                        material_specimen: str,
+                        number_specimen: str,
+                        total_specimen: str,
                         si: bool = False) -> Specimen:
-        specimen = cls(type_sp=type_specimen)
+        specimen = cls(type_sp=type_specimen,
+                       temperature=temperature_specimen,
+                       material=material_specimen,
+                       number=number_specimen,
+                       total=total_specimen)
         specimen.setgeometry({'W': w,
                               'B': b,
                               'a0': a0})

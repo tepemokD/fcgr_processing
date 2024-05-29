@@ -165,7 +165,7 @@ class Message:
         col1, _ = readtwoarray(file2,
                                delta_x=0,
                                delta_y=0)
-        if min(col1) >= min(col2) or max(col1) <= max(col2):
+        if min(col1) > min(col2) or max(col1) < max(col2):
             QMessageBox.critical(self,
                                  title,
                                  "Заданная зависимость не перекрывает экспериментальные данные")
@@ -331,6 +331,10 @@ class Message:
                                 "Предупреждение",
                                 f"При поиске нижней границы устойчивого участка развития трещины не обнаружена "
                                 f"экспериментальная точка, удовлетворяющая заданным критериям")
+        else:
+            QMessageBox.information(self,
+                                    "Прогресс",
+                                    f"Расчет завершен.")
 
     def checking_value(self) -> bool:
         """
