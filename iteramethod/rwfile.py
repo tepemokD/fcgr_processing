@@ -18,6 +18,37 @@ def readtwoarray(name_file: str,
 
     return x_array - delta_x, y_array - delta_y
 
+def readciamfile(name_file: str,
+                 delta_y: float,
+                 delta_x: float,
+                 name_col: str = 'LN') -> Tuple[list, list]:
+    """
+
+    :param name_file: name file
+    :param delta_y: reducing y
+    :param delta_x: reducing x
+    :param name_col:
+    :return: a tuple of two arrays
+    """
+    with open(name_file, 'r', encoding="utf8") as file:
+        list_line = file.read().replace(',', '.').splitlines()
+
+    # list_line убрать пустые строки, убрать три строки, убрать 0-1, 4-12 столбцы
+    i = 0
+    while not list_line[i].strip():
+        i += 1
+    list_line = list_line[i + 3:]
+    n = len(list_line)
+    x_array = np.array([0.0] * n)
+    y_array = np.array([0.0] * n)
+    str_to_float = lambda num: float(num.strip().rstrip(';'))
+    for i in range(n):
+        if name_col == 'LN':
+            _, _, y_array_i, x_array_i, _, _, _, _, _, _, _, _, _ = list_line[i].split()
+        x_array[i] = str_to_float(x_array_i)
+        y_array[i] = str_to_float(y_array_i)
+    return x_array - delta_x, y_array - delta_y
+
 
 def readfivearray(name_file: str) -> Tuple[list, list, list, list, list]:
     """

@@ -377,7 +377,7 @@ class WindowFcgr(QMainWindow,
                                                                  self.lineEdit_number_sp.text(),
                                                                  self.textEdit_total_sp.toPlainText())
 
-        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 1:  # Load file
+        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 1:  # Load file dP(L)
             if (self.checking_file(self.Edit_file_experiment.text(),
                                    title="Ошибка в файле с экспериментальными данными",
                                    column1_check=('increasing',),
@@ -404,7 +404,7 @@ class WindowFcgr(QMainWindow,
                                                                   self.textEdit_total_sp.toPlainText(),
                                                                   si=True if self.units_name.unit == "SI" else False)
 
-        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 0:  # Циклическое
+        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 0:  # dP=const
             if (self.checking_file(self.Edit_file_experiment.text(),
                                    title="Ошибка в файле с экспериментальными данными",
                                    column1_check=('increasing',),
@@ -425,6 +425,31 @@ class WindowFcgr(QMainWindow,
                                                          self.lineEdit_number_sp.text(),
                                                          self.textEdit_total_sp.toPlainText(),
                                                          si=True if self.units_name.unit == "SI" else False)
+
+        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 2:  # Load file L(N)
+            if (self.checking_file(self.Edit_file_experiment.text(),
+                                   title="Ошибка в файле с экспериментальными данными",
+                                   column1_check=('increasing',),
+                                   column2_check=('positive',),
+                                   min_point=True,
+                                   type_file='ciam') and
+                    self.checking_numbers(self.Edit_file_experiment.text(),
+                                          type_file='ciam')):
+                self.specimen = Specimen.create_specimen(self.Edit_file_experiment.text(),
+                                                         ['compact_tension',
+                                                          'single_edge_notch_beam'][
+                                                             self.Box_specimen_type.currentIndex()],
+                                                         self.Edit_w_specimen.value(),
+                                                         self.Edit_B_specimen.value(),
+                                                         self.Edit_a0_specimen.value(),
+                                                         self.Edit_Pmax_load.value(),
+                                                         self.Edit_R_load.value(),
+                                                         self.lineEdit_temperature.text(),
+                                                         self.lineEdit_material.text(),
+                                                         self.lineEdit_number_sp.text(),
+                                                         self.textEdit_total_sp.toPlainText(),
+                                                         si=True if self.units_name.unit == "SI" else False,
+                                                         type_file='ciam')
 
         self.Button_auto_type.setEnabled(True)
         self.Button_auto_type.setChecked(True)

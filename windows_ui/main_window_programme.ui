@@ -541,12 +541,27 @@ p, li { white-space: pre-wrap; }
               </property>
               <item>
                <property name="text">
-                <string>Циклическое</string>
+                <string>dP=const</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Load file</string>
+                <string>Load file dP(L)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Load file L(N)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Load file L(N) dP=const</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Load file L(N) dP(L)</string>
                </property>
               </item>
              </widget>

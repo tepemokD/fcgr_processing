@@ -4,7 +4,7 @@ from os.path import isfile
 
 from numpy import isnan
 
-from iteramethod.rwfile import readtwoarray, readfivearray
+from iteramethod.rwfile import readtwoarray, readfivearray, readciamfile
 from iteramethod.setup import MIN_POINT, MAX_SIF_RANGE_CALCULATED, MIN_SPECIMEN_MEAN_ONE_TEMPERATURE
 
 
@@ -69,7 +69,8 @@ class Message:
                       title: str,
                       column1_check: tuple[str] = ('positive', 'increasing'),
                       column2_check: tuple[str] = ('positive', 'increasing'),
-                      min_point: bool = False) -> bool:
+                      min_point: bool = False,
+                      type_file: str = 'txt') -> bool:
         """
         Checking the file with numeric columns for errors.
         :param file: the path to the file
@@ -77,6 +78,7 @@ class Message:
         :param column1_check: list of criteria for the column1
         :param column2_check: list of criteria for the column1
         :param min_point: checking minimum numer point
+        :param type_file: checking type file: txt - only L and N, ciam - read file machine
         :return: bool: True - not error; False - error.
         """
         if not isfile(file):
@@ -87,9 +89,16 @@ class Message:
             return False
 
         try:
-            col1, col2 = readtwoarray(file,
-                                      delta_x=0,
-                                      delta_y=0)
+            if type_file == 'txt':
+                col1, col2 = readtwoarray(file,
+                                          delta_x=0,
+                                          delta_y=0)
+            elif type_file == 'ciam':
+                col1, col2 = readciamfile(file,
+                                          delta_x=0,
+                                          delta_y=0,
+                                          name_col='LN')
+
         except Exception as error:
             QMessageBox.critical(self,
                                  title,
@@ -124,7 +133,8 @@ class Message:
         return True
 
     def checking_numbers(self,
-                         file: str = None) -> bool:
+                         file: str = None,
+                         type_file: str = 'txt') -> bool:
         """
         Checking the numbers entered in the gui
         :return: bool: True - not error, False - error.
@@ -135,9 +145,16 @@ class Message:
             text += f"<span><br>- значение a<sub>0</sub> должно быть меньше значения W</span>"
 
         if file:
-            _, col2 = readtwoarray(file,
-                                   delta_x=0,
-                                   delta_y=0)
+            if type_file == 'txt':
+                _, col2 = readtwoarray(file,
+                                       delta_x=0,
+                                       delta_y=0)
+            elif type_file == 'ciam':
+                _, col2 = readciamfile(file,
+                                       delta_x=0,
+                                       delta_y=0,
+                                       name_col='LN')
+
             if max(col2) >= self.Edit_w_specimen.value():
                 text += f"<span><br>- значение W должно быть больше максимальной замеренной длины трещины</span>"
 

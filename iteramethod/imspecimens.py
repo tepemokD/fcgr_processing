@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from .listSIF import RangeSIF
-from .rwfile import readtwoarray
+from .rwfile import readtwoarray, readciamfile
 from .crackgrowthrate import FCGR
 
 
@@ -136,7 +136,8 @@ class Specimen(RangeSIF, FCGR):
                         material_specimen: str,
                         number_specimen: str,
                         total_specimen: str,
-                        si: bool = False) -> Specimen:
+                        si: bool = False,
+                        type_file: str = 'txt') -> Specimen:
         specimen = cls(type_sp=type_specimen,
                        temperature=temperature_specimen,
                        material=material_specimen,
@@ -148,7 +149,8 @@ class Specimen(RangeSIF, FCGR):
         specimen.setloads({'Pmax': p_max,
                            'R': r})
         specimen.setcrackgrowth(file_experiment,
-                                delta_length=a0)
+                                delta_length=a0,
+                                type_file=type_file)
         specimen.createfcg()
         if si:
             specimen.use_si()
@@ -191,15 +193,21 @@ class Specimen(RangeSIF, FCGR):
     def setcrackgrowth(self,
                        name_file: str,
                        delta_length: float = 0,
-                       delta_cycle: float = 0) -> None:
+                       delta_cycle: float = 0,
+                       type_file: str = 'txt') -> None:
         """
         Setting experimental data: crack length, number of loading cycles
         :param name_file: Name file with crack length and number of loading cycles
         :param delta_length: reducing the size of the crack length
         :param delta_cycle: reducing the size of the number of loading cycles
+        :param type_file: type file
         :return: None
         """
-        self.cycle_crack, self.length_crack = readtwoarray(name_file, delta_length, delta_cycle)
+        if type_file == 'txt':
+            self.cycle_crack, self.length_crack = readtwoarray(name_file, delta_length, delta_cycle)
+        elif type_file == 'ciam':
+            self.cycle_crack, self.length_crack = readciamfile(name_file, delta_length, delta_cycle, name_col='LN')
+
         self.num_point = len(self.cycle_crack)
 
     def setcrackgrowth_array(self,
