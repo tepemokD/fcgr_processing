@@ -255,11 +255,12 @@ class IterativeMethod(Criteria):
         :return: dict with a calculate result
         """
         self.search12()
+        done = self.done
         self.search23()
         return {'point_numbers': (self.fn12, self.fn23),
                 'coefficient_c': self.coefficient_c,
                 'exponent_n': self.exponent_n,
-                'criteria': self.done}
+                'criteria': done}
 
     def edge(self,
              start: int,

@@ -692,7 +692,7 @@ class WindowFcgr(QMainWindow,
                                       grc_end=self.specimen.fcgr_sample[dict_result['point_numbers'][1]])
                     self._plot_graph_result(dict_result)
 
-                    self.check_result_done(True)
+                    self.check_result_done(dict_result['criteria'])
 
         elif self.Button_borders_type.isChecked():
             self._clear_calculate()
@@ -719,7 +719,7 @@ class WindowFcgr(QMainWindow,
                                   grc_end=self.specimen.fcgr_sample[dict_result['point_numbers'][1]])
                 self._plot_graph_result(dict_result)
 
-                self.check_result_done(True)
+                self.check_result_done(dict_result['criteria'])
 
     def _plot_result_12(self,
                         result: IterativeMethod) -> None:
