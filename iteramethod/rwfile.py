@@ -21,7 +21,7 @@ def readtwoarray(name_file: str,
 def readciamfile(name_file: str,
                  delta_y: float,
                  delta_x: float,
-                 name_col: str = 'LN') -> Tuple[list, list]:
+                 name_col: str = 'LN') -> Tuple[list, list] or Tuple[float, float]:
     """
 
     :param name_file: name file
@@ -45,8 +45,14 @@ def readciamfile(name_file: str,
     for i in range(n):
         if name_col == 'LN':
             _, _, y_array_i, x_array_i, _, _, _, _, _, _, _, _, _ = list_line[i].split()
+        elif name_col == 'Pconst':
+            _, _, _, _, x_array_i, _, _, _, y_array_i, _, _, _, _ = list_line[i].split()
         x_array[i] = str_to_float(x_array_i)
         y_array[i] = str_to_float(y_array_i)
+
+    if name_col == 'Pconst':
+        return np.mean(x_array), np.mean(y_array)
+
     return x_array - delta_x, y_array - delta_y
 
 

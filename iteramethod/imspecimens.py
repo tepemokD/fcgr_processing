@@ -53,7 +53,7 @@ class Specimen(RangeSIF, FCGR):
 
         text += f"\n"
         if self.type_load == 'cyclic_const_load_max':
-            amplitude = self.load_max * (1 - self.asymmetry) / 2
+            amplitude = self.load_max * (1 + self.asymmetry) / 2
             mean = self.load_max * (1 - self.asymmetry) / 2
             text += f"Cycling testing: force amplitude = {amplitude:.2f}, force mean = {mean:.2f}\n"
 

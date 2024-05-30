@@ -4,7 +4,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt6.QtCore import Qt
 
-from iteramethod import Specimen, IterativeMethod
+from iteramethod import Specimen, IterativeMethod, readciamfile
 
 from .verificationmessages import Message
 from .setup_plot import *
@@ -109,6 +109,16 @@ class WindowFcgr(QMainWindow,
 
             self.Edit_file_load.setEnabled(True)
             self.Button_file_load.setEnabled(True)
+
+        elif self.Box_load_type.currentIndex() in [3, 4]:
+            self.Edit_Pmax_load.clear()
+            self.Edit_R_load.clear()
+
+            self.Edit_Pmax_load.setEnabled(False)
+            self.Edit_R_load.setEnabled(False)
+
+            self.Edit_file_load.setEnabled(False)
+            self.Button_file_load.setEnabled(False)
 
         else:
             self.Edit_file_load.clear()
@@ -444,6 +454,39 @@ class WindowFcgr(QMainWindow,
                                                          self.Edit_a0_specimen.value(),
                                                          self.Edit_Pmax_load.value(),
                                                          self.Edit_R_load.value(),
+                                                         self.lineEdit_temperature.text(),
+                                                         self.lineEdit_material.text(),
+                                                         self.lineEdit_number_sp.text(),
+                                                         self.textEdit_total_sp.toPlainText(),
+                                                         si=True if self.units_name.unit == "SI" else False,
+                                                         type_file='ciam')
+
+        elif self.Box_specimen_type.currentIndex() != 2 and self.Box_load_type.currentIndex() == 3:  # Load file L(N) dP=const
+            if (self.checking_file(self.Edit_file_experiment.text(),
+                                   title="Ошибка в файле с экспериментальными данными",
+                                   column1_check=('increasing',),
+                                   column2_check=('positive',),
+                                   min_point=True,
+                                   type_file='ciam') and
+                    self.checking_numbers(self.Edit_file_experiment.text(),
+                                          type_file='ciam')):
+                # без проверки данных на корректность
+                Pmax_file, R_file = readciamfile(self.Edit_file_experiment.text(),
+                                                 0,
+                                                 0,
+                                                 name_col='Pconst')
+                self.Edit_Pmax_load.setValue(Pmax_file)
+                self.Edit_R_load.setValue(R_file)
+
+                self.specimen = Specimen.create_specimen(self.Edit_file_experiment.text(),
+                                                         ['compact_tension',
+                                                          'single_edge_notch_beam'][
+                                                             self.Box_specimen_type.currentIndex()],
+                                                         self.Edit_w_specimen.value(),
+                                                         self.Edit_B_specimen.value(),
+                                                         self.Edit_a0_specimen.value(),
+                                                         Pmax_file,
+                                                         R_file,
                                                          self.lineEdit_temperature.text(),
                                                          self.lineEdit_material.text(),
                                                          self.lineEdit_number_sp.text(),
