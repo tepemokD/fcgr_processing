@@ -98,6 +98,11 @@ class Message:
                                           delta_x=0,
                                           delta_y=0,
                                           name_col='LN')
+            elif type_file == 'ciam_dPL':
+                col1, col2 = readciamfile(file,
+                                          delta_x=0,
+                                          delta_y=0,
+                                          name_col='dPL')
 
         except Exception as error:
             QMessageBox.critical(self,
@@ -168,14 +173,19 @@ class Message:
     def checking_col(self,
                      file1: str,
                      file2: str,
-                     title: str) -> bool:
+                     title: str,
+                     type_file2: str = 'txt') -> bool:
         """
 
         :param file1: a file with two arrays
         :param file2: a file with two arrays
         :param title: name error
+        :param type_file2: type file2: txt - file1 != file2, ciam - file1 == file2
         :return: bool: True - not error, False - error.
         """
+        if type_file2 == 'ciam':
+            return True
+
         _, col2 = readtwoarray(file1,
                                delta_x=0,
                                delta_y=0)

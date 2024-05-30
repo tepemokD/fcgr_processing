@@ -47,6 +47,9 @@ def readciamfile(name_file: str,
             _, _, y_array_i, x_array_i, _, _, _, _, _, _, _, _, _ = list_line[i].split()
         elif name_col == 'Pconst':
             _, _, _, _, x_array_i, _, _, _, y_array_i, _, _, _, _ = list_line[i].split()
+        elif name_col == 'dPL':
+            _, _, x_array_i, _, y_max, y_min, _, _, _, _, _, _, _ = list_line[i].split()
+            y_array_i = str(str_to_float(y_max) - str_to_float(y_min))
         x_array[i] = str_to_float(x_array_i)
         y_array[i] = str_to_float(y_array_i)
 

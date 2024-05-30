@@ -1,7 +1,7 @@
 from .setup import *
 
-from .rwfile import readtwoarray
-from .calculate import interpolatecubicspline
+from .rwfile import readtwoarray, readciamfile
+from .calculate import interpolatecubicspline, interlinear
 
 from math import pow, sqrt, pi
 from typing import Union
@@ -91,12 +91,14 @@ class RangeSIF:
     def setloads(self,
                  param: Union[dict, str],
                  delta_length: float = 0,
-                 delta_load: float = 0) -> None:
+                 delta_load: float = 0,
+                 type_file: str = 'txt') -> None:
         """
         Setting the loading parameters of the specimen
         :param param: Dictionary with loading parameters or name file with table length and load
         :param delta_length: reducing the size of the crack length
         :param delta_load: reducing the size of load
+        :param type_file: txt - only dP(L), ciam - file machine
         :return: None
         """
         assert self.type_load != 'user_SIF', "Not use the module 'setloads' for load type 'user_SIF'"
@@ -106,8 +108,19 @@ class RangeSIF:
             self.asymmetry = param['R']
             self._range_load = self._load_const_load_max
         elif self.type_load == 'user_load':
-            self.length_load, self.load_range = readtwoarray(param, delta_load, delta_length)
-            self._range_load = interpolatecubicspline(self.length_load, self.load_range)
+            if type_file == 'txt':
+                self.length_load, self.load_range = readtwoarray(param,
+                                                                 delta_load,
+                                                                 delta_length)
+                self._range_load = interpolatecubicspline(self.length_load,
+                                                          self.load_range)
+            elif type_file == 'ciam':
+                self.length_load, self.load_range = readciamfile(param,
+                                                                 delta_load,
+                                                                 delta_length,
+                                                                 name_col='dPL')
+                self._range_load = interlinear(self.length_load,
+                                               self.load_range)
 
     def setsif(self,
                name_file: str,

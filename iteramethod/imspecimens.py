@@ -104,7 +104,8 @@ class Specimen(RangeSIF, FCGR):
                                  material_specimen: str,
                                  number_specimen: str,
                                  total_specimen: str,
-                                 si: bool = False) -> Specimen:
+                                 si: bool = False,
+                                 type_file: str = 'txt') -> Specimen:
         specimen = cls(type_sp=type_specimen,
                        type_load='user_load',
                        temperature=temperature_specimen,
@@ -115,8 +116,10 @@ class Specimen(RangeSIF, FCGR):
                               'B': b,
                               'a0': a0})
         specimen.setcrackgrowth(file_experiment,
-                                delta_length=a0)
-        specimen.setloads(file_load)
+                                delta_length=a0,
+                                type_file=type_file)
+        specimen.setloads(file_load,
+                          type_file=type_file)
         specimen.createfcg()
 
         if si:
