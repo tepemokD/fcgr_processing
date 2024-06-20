@@ -394,11 +394,11 @@ class WindowFcgr(QMainWindow,
                                    column2_check=('positive',),
                                    min_point=True) and
                     self.checking_file(self.Edit_file_load.text(),
-                                       title="Ошибка в файле с зависимостью размаха напряжений от длины трещины",
+                                       title="Ошибка в файле с зависимостью размаха нагружения от длины трещины",
                                        column2_check=('positive',)) and
                     self.checking_col(self.Edit_file_experiment.text(),
                                       self.Edit_file_load.text(),
-                                      "Ошибка в файле с зависимостью размаха напряжений от длины трещины") and
+                                      "Ошибка в файле с зависимостью размаха нагружения от длины трещины") and
                     self.checking_numbers(self.Edit_file_experiment.text())):
                 self.specimen = Specimen.create_specimen_set_load(self.Edit_file_experiment.text(),
                                                                   ['compact_tension',
@@ -502,12 +502,12 @@ class WindowFcgr(QMainWindow,
                                    min_point=True,
                                    type_file='ciam') and
                     self.checking_file(self.Edit_file_experiment.text(),
-                                       title="Ошибка в файле с зависимостью размаха напряжений от длины трещины",
+                                       title="Ошибка в файле с зависимостью размаха нагружения от длины трещины",
                                        column2_check=('positive',),
                                        type_file='ciam_dPL') and
                     self.checking_col(self.Edit_file_experiment.text(),
                                       self.Edit_file_experiment.text(),
-                                      "Ошибка в файле с зависимостью размаха напряжений от длины трещины",
+                                      "Ошибка в файле с зависимостью размаха нагружения от длины трещины",
                                       type_file2='ciam') and
                     self.checking_numbers(self.Edit_file_experiment.text(),
                                           type_file='ciam')):
@@ -691,8 +691,6 @@ class WindowFcgr(QMainWindow,
                                       grc_start=self.specimen.fcgr_sample[dict_result['point_numbers'][0]],
                                       grc_end=self.specimen.fcgr_sample[dict_result['point_numbers'][1]])
                     self._plot_graph_result(dict_result)
-
-                    self.check_result_done(dict_result['criteria'])
 
         elif self.Button_borders_type.isChecked():
             self._clear_calculate()
